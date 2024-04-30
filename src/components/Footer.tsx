@@ -2,21 +2,20 @@ import stylex from '@stylexjs/stylex';
 import { layout, layoutDark, layoutLight } from '../styleX/layout.stylex';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-const Introduction = () => {
+
+const Footer = () => {
   const { isDark } = useContext(ThemeContext);
   return (
-    <div>
-      <div>
-        <p
-          {...stylex.props(
-            layout.text,
-            isDark ? layoutDark.text : layoutLight.text
-          )}
-        >
-          Hi everyone! I happy to see you here!
-        </p>
+    <div
+      {...stylex.props(
+        layout.footer,
+        isDark ? layoutDark.footer : layoutLight.footer
+      )}
+    >
+      <div {...stylex.props(layout.copyright)}>
+        © {new Date().getFullYear()} Movchanchik
       </div>
     </div>
   );
 };
-export default Introduction;
+export default Footer;

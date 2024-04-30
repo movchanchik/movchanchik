@@ -1,0 +1,6 @@
+@import 'reset-css';
+
+body,
+html {
+  font-family: 'Poppins', sans-serif;
+}
