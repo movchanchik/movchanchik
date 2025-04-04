@@ -6,7 +6,7 @@ function Contact() {
     <section className={styles.contactSection}>
       <h1>Contact Me</h1>
       <p>
-        If you're interested in working together or just want to say hi — drop
+        If you’re interested in working together or just want to say hi — drop
         me a message!
       </p>
 

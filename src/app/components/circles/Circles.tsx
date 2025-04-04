@@ -126,7 +126,7 @@ const Circles = () => {
       container.removeEventListener("mousemove", handleMouseMove);
       container.innerHTML = "";
     };
-  }, []);
+  }, [circleCount]);
 
   return (
     <div
