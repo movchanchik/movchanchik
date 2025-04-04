@@ -1,0 +1,23 @@
+.container {
+  padding: 80px 24px;
+  text-align: center;
+  background-color: #fefcfb;
+  color: #14362e;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.heading {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.signature {
+  margin-top: 30px;
+  font-style: italic;
+  color: #888;
+}

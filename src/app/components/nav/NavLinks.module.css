@@ -1,0 +1,40 @@
+.navList {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navList li {
+  list-style: none;
+  margin-left: 0;
+}
+
+.navList li a {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(2, 24, 20);
+  padding: 16px 24px;
+  display: block;
+}
+
+.navList li:hover a {
+  color: #c2755a;
+}
+
+.navList a.active {
+  color: #d6a94a;
+}
+
+.navList a.active:hover {
+  color: #c2755a;
+}
+
+.navList li:visited a:visited {
+  color: rgb(2, 24, 20);
+}
+
+@media screen and (max-width: 1024px) {
+  .navList li a {
+    padding: 16px 12px;
+  }
+}

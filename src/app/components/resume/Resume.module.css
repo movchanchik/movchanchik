@@ -1,0 +1,52 @@
+.resumeSection {
+  width: 100%;
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2ede4;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  color: rgb(2, 24, 20);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgb(20, 54, 46);
+  color: #1f2937;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.button span {
+  color: #f2ede4;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: rgb(34, 74, 62);
+}
+
+@media screen and (max-width: 1024px) {
+  .text {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,32 @@
+.header {
+  background-color: #f2ede4;
+}
+
+.headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: auto;
+  height: 60px;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(2, 24, 24);
+}
+
+@media (max-width: 1024px) {
+  .logoText {
+    display: none;
+  }
+}

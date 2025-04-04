@@ -1,0 +1,27 @@
+.contactSection {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.contactSection h1 {
+  font-size: 36px;
+  color: #14362e;
+  margin-bottom: 20px;
+}
+
+.contactSection p {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.contactInfo a {
+  color: #009688;
+  text-decoration: none;
+}
+
+.contactInfo a:hover {
+  text-decoration: underline;
+}
