@@ -58,14 +58,7 @@ function NavLinksMobile() {
                   Home
                 </Link>
               </li>
-              {/* <li>
-                <Link
-                  href="/about"
-                  className={pathname === "/about" ? styles.active : ""}
-                >
-                  About
-                </Link>
-              </li>
+              {/* 
               <li>
                 <Link
                   href="/experience"
