@@ -26,7 +26,7 @@ function Footer() {
               </li>
               <li>
                 <label>Mobile Number:</label>
-                <a href="tel:+14167318442">+1 (416) 741-8442</a>
+                <a href="tel:+14167318442">+1 (416) 731-8442</a>
               </li>
             </ul>
           </div>
