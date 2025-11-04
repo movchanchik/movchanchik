@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import React from "react";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Contact | Movchanchik",
+  description:
+    "Get in touch with Inna Movchan for frontend collaborations, projects, or a quick hello.",
+};
 
 function Contact() {
   return (
@@ -17,7 +24,11 @@ function Contact() {
         </p>
         <p>
           <strong>LinkedIn:</strong>{" "}
-          <a href="https://www.linkedin.com/in/movchanchik" target="_blank">
+          <a
+            href="https://www.linkedin.com/in/movchanchik"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             @movchanchik
           </a>
         </p>

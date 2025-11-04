@@ -25,6 +25,7 @@ const Circles = () => {
     const container = containerRef.current;
     if (!container) return;
 
+    container.innerHTML = "";
     const circles: HTMLDivElement[] = [];
 
     for (let i = 0; i < circleCount; i++) {
@@ -71,59 +72,73 @@ const Circles = () => {
       }, i * 50);
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
+    let pointerPosition: { x: number; y: number } | null = null;
+    let rafId: number | null = null;
+
+    const resetTransforms = () => {
+      circles.forEach((circle) => {
+        circle.style.transform = "translate(-50%, -50%) scale(1)";
+      });
+    };
+
+    const updateCirclePositions = () => {
+      rafId = null;
+
+      if (!pointerPosition) {
+        resetTransforms();
+        return;
+      }
+
       const rect = container.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
 
       circles.forEach((circle) => {
         const circleLeft = (parseFloat(circle.style.left) / 100) * rect.width;
         const circleTop = (parseFloat(circle.style.top) / 100) * rect.height;
-        const dx = circleLeft - mouseX;
-        const dy = circleTop - mouseY;
-        const distance = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+        const dx = circleLeft - pointerPosition.x;
+        const dy = circleTop - pointerPosition.y;
+        const distance = Math.max(Math.hypot(dx, dy), 1);
         const moveX = (dx / distance) * 20;
         const moveY = (dy / distance) * 20;
 
         circle.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) scale(1)`;
       });
-
-      // Cursor-following floating circle
-      const cursorCircle = document.createElement("div");
-      const size = Math.random() * 15 + 5;
-      const color = palette[Math.floor(Math.random() * palette.length)];
-
-      Object.assign(cursorCircle.style, {
-        position: "absolute",
-        width: `${size}px`,
-        height: `${size}px`,
-        backgroundColor: color,
-        borderRadius: "50%",
-        left: `${mouseX}px`,
-        top: `${mouseY}px`,
-        transform: "translate(-50%, -50%)",
-        opacity: "1",
-        pointerEvents: "none",
-        transition: "all 0.8s ease-out",
-        zIndex: 10,
-      });
-
-      container.appendChild(cursorCircle);
-
-      requestAnimationFrame(() => {
-        cursorCircle.style.opacity = "0";
-        cursorCircle.style.transform += " scale(1.5)";
-      });
-
-      setTimeout(() => {
-        container.removeChild(cursorCircle);
-      }, 800);
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
+    const queueUpdate = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(updateCirclePositions);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const rect = container.getBoundingClientRect();
+      const withinBounds =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if (!withinBounds) {
+        pointerPosition = null;
+        queueUpdate();
+        return;
+      }
+
+      pointerPosition = {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      };
+
+      queueUpdate();
+    };
+
+    window.addEventListener("pointermove", handlePointerMove);
 
     return () => {
-      container.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("pointermove", handlePointerMove);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      pointerPosition = null;
       container.innerHTML = "";
     };
   }, [circleCount]);
@@ -137,6 +152,7 @@ const Circles = () => {
         height: isVertical ? "100%" : "400px",
         pointerEvents: "none",
       }}
+      aria-hidden="true"
     />
   );
 };

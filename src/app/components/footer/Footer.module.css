@@ -14,7 +14,7 @@
   display: flex;
   gap: 8px;
 }
-.socialLinks label {
+.linkLabel {
   font-size: 16px;
   font-weight: 600;
 }

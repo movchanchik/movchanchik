@@ -31,18 +31,21 @@ function Hero() {
       <Wrapper>
         <div className={styles.row1}>
           <div className={styles.left}>
-            <div className={styles.decorativeCircles}>
+            <div className={styles.decorativeCircles} aria-hidden="true">
               <span
+                aria-hidden
                 className={`${styles.circle} ${isLoaded ? styles.visible : ""}`}
                 style={{ transitionDelay: "0.4s" }}
               ></span>
               <span
+                aria-hidden
                 className={`${styles.circle} ${styles.circleSm} ${
                   isLoaded ? styles.visible : ""
                 }`}
                 style={{ transitionDelay: "0.6s" }}
               ></span>
               <span
+                aria-hidden
                 className={`${styles.circle} ${styles.circleMd} ${
                   isLoaded ? styles.visible : ""
                 }`}
@@ -56,7 +59,7 @@ function Hero() {
               <Image
                 priority
                 src={ProfilePhoto}
-                alt="Movchanchik"
+                alt="Portrait of Inna Movchan"
                 className={styles.photo}
               />
             </div>
@@ -64,14 +67,14 @@ function Hero() {
 
           <div className={styles.right}>
             <div className={styles.textWrap}>
-              <p className={[styles.line, styles.line1].join(" ")}>
+              <h1 className={[styles.line, styles.line1].join(" ")}>
                 Hello everyone,
-              </p>
+              </h1>
               <p className={[styles.line, styles.line2].join(" ")}>
                 I’m Inna 👋
               </p>
               <p className={[styles.line, styles.line3].join(" ")}>
-                I’m Frontend Developer
+                I’m a Frontend Developer
               </p>
             </div>
           </div>

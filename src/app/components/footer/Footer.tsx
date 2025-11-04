@@ -10,22 +10,23 @@ function Footer() {
           <div className={styles.footerSocial}>
             <ul className={styles.socialLinks}>
               <li>
-                <label>LinkedIn:</label>
+                <span className={styles.linkLabel}>LinkedIn:</span>
                 <a
                   target="_blank"
                   href="https://www.linkedin.com/in/movchanchik/"
+                  rel="noreferrer noopener"
                 >
                   @movchanchik
                 </a>
               </li>
               <li>
-                <label>Email:</label>
+                <span className={styles.linkLabel}>Email:</span>
                 <a href="mailto:movchan.in09@gmail.com">
                   movchan.in09@gmail.com
                 </a>
               </li>
               <li>
-                <label>Mobile Number:</label>
+                <span className={styles.linkLabel}>Mobile Number:</span>
                 <a href="tel:+14167318442">+1 (416) 731-8442</a>
               </li>
             </ul>

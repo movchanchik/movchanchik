@@ -1,17 +1,62 @@
-// pages/api/linkedin/auth.ts
 import type { NextApiRequest, NextApiResponse } from "next";
+import crypto from "crypto";
+import {
+  STATE_COOKIE,
+  VERIFIER_COOKIE,
+  buildCookieHeader,
+  resolveRedirectUri,
+} from "./utils";
 
-const client_id = process.env.LINKEDIN_CLIENT_ID;
-const redirect_uri = "http://localhost:3000/api/linkedin/callback";
+const LINKEDIN_AUTH_URL =
+  "https://www.linkedin.com/oauth/v2/authorization";
+
+const toBase64Url = (input: Buffer) =>
+  input
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!client_id) {
+  if (req.method !== "GET") {
+    res.setHeader("Allow", ["GET"]);
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const clientId = process.env.LINKEDIN_CLIENT_ID;
+
+  if (!clientId) {
     return res.status(500).json({ error: "Missing LinkedIn client ID" });
   }
-  console.log("🔁 API route /api/linkedin/auth triggered");
-  const authURL = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(
-    redirect_uri
-  )}&state=movchanchik&&scope=openid%20profile%20email%20w_member_social`;
 
-  res.redirect(authURL);
+  const redirectUri = resolveRedirectUri(req);
+  const scope =
+    process.env.LINKEDIN_OAUTH_SCOPES ??
+    "openid profile email w_member_social";
+
+  const state = crypto.randomUUID();
+  const codeVerifier = toBase64Url(crypto.randomBytes(32));
+  const codeChallenge = toBase64Url(
+    crypto.createHash("sha256").update(codeVerifier).digest()
+  );
+
+  res.setHeader("Set-Cookie", [
+    buildCookieHeader(STATE_COOKIE, state, 600),
+    buildCookieHeader(VERIFIER_COOKIE, codeVerifier, 600),
+  ]);
+
+  const authParams = new URLSearchParams({
+    response_type: "code",
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    state,
+    scope,
+    code_challenge: codeChallenge,
+    code_challenge_method: "S256",
+  });
+
+  res
+    .status(307)
+    .setHeader("Location", `${LINKEDIN_AUTH_URL}?${authParams.toString()}`)
+    .end();
 }
