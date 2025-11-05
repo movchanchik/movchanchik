@@ -1,7 +1,8 @@
 import React from "react";
+import Board from "./components/Board";
 
 function page() {
-  return <div>Hello everyone!!! it is a game</div>;
+  return <Board />;
 }
 
 export default page;

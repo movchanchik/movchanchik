@@ -17,8 +17,7 @@ export type Level = {
 
 export type GameState = {
   deck: Deck;
-  flippedCards: Card[];
-  matchedCards: Card[];
+  flippedIds: string[];
   moves: number;
   level: Level;
   isGameOver: boolean;
