@@ -1,8 +1,8 @@
 import React from "react";
-import Board from "./components/Board";
+import ChooseLevel from "./components/ChooseLevel";
 
 function page() {
-  return <Board />;
+  return <ChooseLevel />;
 }
 
 export default page;
