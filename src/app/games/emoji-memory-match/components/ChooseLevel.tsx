@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Board from "./Board";
 import { levels } from "../domain/levels";
 import Button from "@mui/material/Button";
@@ -9,11 +8,14 @@ import Wrapper from "@/app/components/wrapper/Wrapper";
 import { Level } from "../domain/type";
 import { startGame } from "../domain/engine";
 
-function ChooseLevel() {
-  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
+type ChooseLevelProps = {
+  selectedLevel: Level;
+  onSelectLevel: (level: Level) => void;
+};
 
+function ChooseLevel({ selectedLevel, onSelectLevel }: ChooseLevelProps) {
   const handleChooseLevel = (level: Level) => {
-    setSelectedLevel(level);
+    onSelectLevel(level);
     startGame(level);
   };
 
