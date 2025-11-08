@@ -1,12 +1,10 @@
 import React from "react";
-import Board from "./Board";
 import { levels } from "../domain/levels";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Wrapper from "@/app/components/wrapper/Wrapper";
 import { Level } from "../domain/type";
-import { startGame } from "../domain/engine";
 
 type ChooseLevelProps = {
   selectedLevel: Level;
@@ -14,11 +12,6 @@ type ChooseLevelProps = {
 };
 
 function ChooseLevel({ selectedLevel, onSelectLevel }: ChooseLevelProps) {
-  const handleChooseLevel = (level: Level) => {
-    onSelectLevel(level);
-    startGame(level);
-  };
-
   return (
     <Wrapper>
       <Typography
@@ -42,14 +35,28 @@ function ChooseLevel({ selectedLevel, onSelectLevel }: ChooseLevelProps) {
           <Button
             key={level.id}
             variant="contained"
-            onClick={() => handleChooseLevel(level)}
-            disabled={selectedLevel === level}
+            onClick={() => onSelectLevel(level)}
+            disabled={selectedLevel.id === level.id}
+            sx={{
+              backgroundColor: selectedLevel.id === level.id ? "#0f3b32" : "#0f766e",
+              color: "#f8fafc",
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              "&:hover": {
+                backgroundColor: selectedLevel.id === level.id ? "#0d2a24" : "#0c5d55",
+              },
+              "&.Mui-disabled": {
+                backgroundColor: "#0f3b32",
+                color: "#bfe7db",
+                border: "none",
+              },
+            }}
           >
             Level {level.id}: {level.name}
           </Button>
         ))}
       </Box>
-      {selectedLevel && <Board level={selectedLevel} />}
     </Wrapper>
   );
 }

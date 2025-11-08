@@ -6,6 +6,7 @@ type CardProps = {
   card: CardType;
   isFlipped?: boolean;
   isMatched?: boolean;
+  isMismatch?: boolean;
   disabled?: boolean;
   onFlip?: (card: CardType) => void;
 };
@@ -14,6 +15,7 @@ const Card: React.FC<CardProps> = ({
   card,
   isFlipped,
   isMatched,
+  isMismatch,
   disabled = false,
   onFlip,
 }) => {
@@ -31,6 +33,7 @@ const Card: React.FC<CardProps> = ({
         styles.card,
         reveal ? styles.flipped : "",
         isMatched ? styles.matched : "",
+        isMismatch ? styles.mismatch : "",
       ]
         .filter(Boolean)
         .join(" ")}

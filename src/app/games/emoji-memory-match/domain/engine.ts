@@ -41,11 +41,12 @@ export const startGame = (level: Level) => {
     moves: 0,
     level,
     isGameOver: false,
+    pendingReset: false,
   };
 };
 
 export const flipCard = (gameState: GameState, cardId: string) => {
-  if (gameState.isGameOver) return gameState;
+  if (gameState.isGameOver || gameState.pendingReset) return gameState;
 
   const card = findCard(gameState.deck, cardId);
   if (!card) return gameState;
@@ -72,8 +73,9 @@ export const flipCard = (gameState: GameState, cardId: string) => {
     if (!isMatch) {
       return {
         ...gameState,
-        flippedIds: [],
+        flippedIds: [firstCard.id, card.id],
         moves: gameState.moves + 1,
+        pendingReset: true,
       };
     }
 
@@ -86,6 +88,7 @@ export const flipCard = (gameState: GameState, cardId: string) => {
       flippedIds: [],
       moves: gameState.moves + 1,
       isGameOver: done,
+      pendingReset: false,
     };
   }
 

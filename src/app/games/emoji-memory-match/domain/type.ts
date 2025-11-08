@@ -21,4 +21,5 @@ export type GameState = {
   moves: number;
   level: Level;
   isGameOver: boolean;
+  pendingReset: boolean;
 };
