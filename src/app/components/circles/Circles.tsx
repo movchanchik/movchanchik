@@ -84,7 +84,9 @@ const Circles = () => {
     const updateCirclePositions = () => {
       rafId = null;
 
-      if (!pointerPosition) {
+      const currentPointer = pointerPosition;
+
+      if (!currentPointer) {
         resetTransforms();
         return;
       }
@@ -94,8 +96,8 @@ const Circles = () => {
       circles.forEach((circle) => {
         const circleLeft = (parseFloat(circle.style.left) / 100) * rect.width;
         const circleTop = (parseFloat(circle.style.top) / 100) * rect.height;
-        const dx = circleLeft - pointerPosition.x;
-        const dy = circleTop - pointerPosition.y;
+        const dx = circleLeft - currentPointer.x;
+        const dy = circleTop - currentPointer.y;
         const distance = Math.max(Math.hypot(dx, dy), 1);
         const moveX = (dx / distance) * 20;
         const moveY = (dy / distance) * 20;
